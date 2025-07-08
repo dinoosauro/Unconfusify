@@ -34,7 +34,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build webpage
-        run: npx vite build
+        run: npm i && npx vite build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
