@@ -1,0 +1,158 @@
+:root {
+  --background: #151515;
+  --background-light: #fafafa;
+  --text: #fafafa;
+  --text-light: #151515;
+  --card: #313131;
+  --card-light: #e2e2e2;
+  --input: #68643c;
+  --input-light: #c9c595;
+  --font: "Work Sans", sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--font);
+  padding: 10px;
+}
+
+.card {
+  padding: 10px;
+  background-color: var(--card);
+  border-radius: 8px;
+}
+
+input:not([type=checkbox]),
+button,
+textarea, select {
+  background-color: var(--input);
+  font-family: var(--font);
+  padding: 10px;
+  color: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 8px;
+  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+}
+
+.flex {
+  display: flex;
+}
+
+.hcenter {
+  align-items: center;
+}
+
+.gap {
+  gap: 10px
+}
+
+.multiCard>div {
+  flex: 1 0 300px;
+}
+
+.multiMiniCard>* {
+  flex: 1 0 200px;
+}
+
+.multiCard {
+  flex-wrap: wrap;
+}
+
+.dialog>div {
+  width: calc(70vw - 30px);
+  position: fixed;
+  top: 15vh;
+  left: 15vw;
+  padding: 10px 15px;
+  height: calc(70vh - 20px);
+  background-color: var(--card);
+  opacity: 1;
+  border-radius: 8px;
+}
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px) brightness(40%);
+  -webkit-backdrop-filter: blur(8px) brightness(40%);
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+  display: none;
+}
+
+.downloadCenter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.wcenter {
+  justify-content: center;
+}
+
+a {
+  color: var(--text);
+}
+
+button {
+  transition: filter 0.2s ease-in-out;
+}
+
+button:hover {
+  filter: brightness(130%);
+  cursor: pointer;
+}
+
+button:active {
+  filter: brightness(150%);
+}
+
+input[type=checkbox] {
+  width: 60px;
+  height: 20px;
+  border: 1px solid var(--text);
+  min-width: 60px;
+  min-height: 20px;
+  border-radius: 8px;
+  background-color: var(--card);
+  appearance: none;
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type=checkbox]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  background-color: var(--text);
+  position: absolute;
+  transition: left 0.2s ease-in-out;
+}
+
+input[type=checkbox]:checked {
+  background-color: var(--input);
+}
+
+input[type=checkbox]:checked::before {
+  left: 42px
+}
+
+.hover:hover, input[type=checkbox]:hover {
+  cursor: pointer;
+}
+select {
+  width: 100%;
+}

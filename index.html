@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unconfusify</title>
+  <link rel="icon" href="./logo.svg" data-icon="href">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+    <link rel="manifest" href="./manifest.json" />
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="flex hcenter wcenter gap" style="margin-bottom: 20px;">
+      <img src="./logo.svg" data-icon="src" style="width: 48px; height: 48px;">
+      <h1 style="margin: 0">Unconfusify</h1>
+    </div>
+    <p>Replace confusable characters with ease. We'll try converting the string to ASCII characters, and if it's not
+      possible, we'll try to replace them with similar
+      characters. <span id="fileReader" style="text-decoration: underline;">Read from a file</span>, or write the
+      content below.</p>
+    <textarea id="text"></textarea><br><br>
+    <label class="flex hcenter gap">
+      <input type="checkbox" id="replaceInvisible">
+      <label>Replace invisibile characters</label>
+      <select id="replaceInvisibleOpt">
+        <option value="space">With a space</option>
+        <option value="nothing">With nothing (delete them)</option>
+        <option value="custom">With a custom string (in "Unreplaceable characters")</option>
+      </select>
+    </label><br>
+    <label class="flex hcenter gap">
+      <input type="checkbox" id="replaceMultipleSpaces">Replace multiple spaces if they're next to each other
+    </label><br>
+    <button id="generate">Generate</button><br><br>
+    <div class="flex multiCard gap">
+      <div class="card">
+        <h2>Unreplaceable characters:</h2>
+        <p>You can find here below some characters that can't be replaced. Choose the eventual replacement.</p>
+        <div id="unreplaceableCharacters"></div>
+      </div>
+      <div class="card">
+        <h2>Conversion result:</h2>
+        <i>Automatically replaced <span id="numberReplaced">0</span> character(s).</i><br><br>
+        <div class="flex gap multiCard multiMiniCard">
+          <button id="copy">Copy</button><button id="download">Download</button>
+        </div>
+        <br>
+        <p style="white-space: pre;" id="result"></p>
+      </div>
+    </div>
+  </div>
+  <div class="dialog" id="downloadDialog">
+    <div>
+      <h2>Download file</h2>
+      <p>Put a name for the file, and click on the link below to download it.</p>
+      <input type="text" id="fileName"><br><br>
+      <div class="flex gap multiCard multiMiniCard">
+        <button style="padding: 0px">
+          <div style="position: relative; height: 36px" data-adaptheight>
+            <a class="flex hcenter wcenter downloadCenter" id="downloadLink">Download file</a>
+          </div>
+        </button>
+        <button data-closedialog>Close</button>
+      </div>
+    </div>
+  </div>
+  <div class="dialog" id="unicodeSymbolDialog">
+    <div>
+      <h2>Unicode Symbol</h2>
+      <p>Code: <strong><a id="viewUnicodeDetails" target="_blank"></a></strong></p><br>
+      <div class="flex gap multiCard multiMiniCard">
+        <button id="restoreReplacement">Restore custom replacement</button>
+        <button data-closedialog>Close</button>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <p><strong>Want to do the opposite?</strong> Replace the characters of a string with strange, less-common ones with <a
+      href="https://dinoosauro.github.io/Confusify/" target="_blank">Confusify.</a></p><br>
+  <div class="flex gap" style="text-wrap: wrap;">
+    <a href="http://github.com/dinoosauro/Unconfusify" target="_blank">View on GitHub</a>
+    <label id="changeTheme" style="text-decoration: underline;" class="hover">Change theme</label>
+  </div>
+  <script>
+    const version = "1.0.0";
+      (async () => {
+        const result = await navigator.serviceWorker.register('./service-worker.js', {scope: location.href.substring(0, location.href.lastIndexOf("/") + 1)});
+        if (navigator.onLine) await result.update();
+      })();
+    fetch("./unconfusify-updatecode", { cache: "no-store" }).then((res) => res.text().then((text) => { if (text.replace("\n", "") !== version) if (confirm(`There's a new version of Unconfusify. Do you want to update? [${version} --> ${text.replace("\n", "")}]`)) { caches.delete("unconfusify-cache"); location.reload(true); } }).catch((e) => { console.error(e) })).catch((e) => console.error(e)); // Check if the application code is the same as the current application version and, if not, ask the user to update
+  </script>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

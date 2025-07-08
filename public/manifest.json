@@ -1,0 +1,16 @@
+{
+  "name": "Unconfusify",
+  "short_name": "Unconfusify",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#191919",
+  "theme_color": "#68643c",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./logo_light.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
